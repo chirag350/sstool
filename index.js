@@ -5,10 +5,9 @@ const clipboardy = require('clipboardy');
 const fs = require('fs');
 const FormData = require('form-data');
 const shelljs = require('shelljs');
-// config start
-const keyfrompxl = '' // get your upload key from pxl.blue
-const hostfrompxl = '' // the domain you want, like everything.is-bannable.xyz, must be a valid one
-// config end
+const configFile = require('$HOME/.config/sstool/config.json')
+const keyfrompxl = configFile.key
+const hostfrompxl = configFile.host
 function makeid(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -20,7 +19,7 @@ function makeid(length) {
 }
 let data = new FormData();
 const filename = makeid(20)
-const dir = `/home/$HOME/images/` + filename + '.png'
+const dir = `$HOME/images/` + filename + '.png'
 shelljs.exec(`gnome-screenshot -a -f ${dir}`)
 data.append('file', fs.createReadStream(dir), `${filename}.png`)
 data.append('key', keyfrompxl)
