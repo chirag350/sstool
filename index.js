@@ -5,7 +5,7 @@ const clipboardy = require('clipboardy');
 const fs = require('fs');
 const FormData = require('form-data');
 const shelljs = require('shelljs');
-const configFile = require('$HOME/.config/sstool/config.json')
+const configFile = require('/home/$USER/.config/sstool/config.json')
 const keyfrompxl = configFile.key
 const hostfrompxl = configFile.host
 function makeid(length) {
@@ -19,7 +19,7 @@ function makeid(length) {
 }
 let data = new FormData();
 const filename = makeid(20)
-const dir = `$HOME/images/` + filename + '.png'
+const dir = `/home/$USER/images/` + filename + '.png'
 shelljs.exec(`gnome-screenshot -a -f ${dir}`)
 data.append('file', fs.createReadStream(dir), `${filename}.png`)
 data.append('key', keyfrompxl)
